@@ -9,6 +9,14 @@
   <i>FB3M7 — language support for Fujitsu FM-7 F-BASIC V3.0: syntax highlighting, line numbering, renumber, jump, diagnostics and more.</i>
 </p>
 
+<p align="center">
+  <a href="https://marketplace.visualstudio.com/items?itemName=7032.fb3m7"><img src="https://img.shields.io/visual-studio-marketplace/v/7032.fb3m7?label=Marketplace&color=2C68C3&logo=visualstudiocode" alt="Marketplace Version"></a>
+  <a href="https://marketplace.visualstudio.com/items?itemName=7032.fb3m7"><img src="https://img.shields.io/visual-studio-marketplace/i/7032.fb3m7?label=Installs&color=2C68C3" alt="Installs"></a>
+  <a href="https://marketplace.visualstudio.com/items?itemName=7032.fb3m7"><img src="https://img.shields.io/visual-studio-marketplace/r/7032.fb3m7?label=Rating&color=2C68C3" alt="Rating"></a>
+  <a href="https://github.com/7032/FB3M7/releases"><img src="https://img.shields.io/github/v/release/7032/FB3M7?label=Release" alt="GitHub Release"></a>
+  <a href="./LICENSE"><img src="https://img.shields.io/badge/License-MIT-green" alt="License: MIT"></a>
+</p>
+
 ---
 
 **FB3M7** は、レトロ機 FM-7 の F-BASIC V3.0 ソース（`.BAS`）を、行番号ベースの古典 BASIC ならではの操作感を保ちつつ、最新エディタの支援機能つきで編集できる言語拡張です。
