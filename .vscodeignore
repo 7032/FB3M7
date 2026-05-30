@@ -1,0 +1,18 @@
+# ローカル専用ルール（絶対に同梱しない）
+CLAUDE.local.md
+*.local.md
+.claude/**
+
+# 開発用ソース・ドキュメント（配布物には不要）
+.vscode/**
+src/**
+docs/**
+examples/**
+assets/*.svg
+**/*.ts
+**/*.map
+tsconfig.json
+.gitignore
+.vscodeignore
+node_modules/**
+**/*.vsix

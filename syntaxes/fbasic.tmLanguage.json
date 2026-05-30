@@ -1,0 +1,90 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "F-BASIC 3.0",
+  "scopeName": "source.fbasic",
+  "patterns": [
+    { "include": "#line-number" },
+    { "include": "#comment-rem" },
+    { "include": "#comment-apostrophe" },
+    { "include": "#play-string" },
+    { "include": "#string" },
+    { "include": "#jump-statement" },
+    { "include": "#function" },
+    { "include": "#statement-keyword" },
+    { "include": "#clause-keyword" },
+    { "include": "#operator-keyword" },
+    { "include": "#number" },
+    { "include": "#operator-symbol" }
+  ],
+  "repository": {
+    "line-number": {
+      "match": "^\\s*(\\d+)",
+      "captures": {
+        "1": { "name": "entity.name.function.line-number.fbasic" }
+      }
+    },
+    "comment-rem": {
+      "match": "(?i)(?<![A-Za-z0-9_$])REM\\b.*$",
+      "name": "comment.line.rem.fbasic"
+    },
+    "comment-apostrophe": {
+      "match": "'.*$",
+      "name": "comment.line.apostrophe.fbasic"
+    },
+    "play-string": {
+      "comment": "PLAY 文の MML 文字列。音符・コマンドを内部でハイライト",
+      "name": "string.quoted.double.mml.fbasic",
+      "begin": "(?i)(?<=PLAY)\\s*\"",
+      "end": "\"|$",
+      "patterns": [
+        { "match": "(?i)[OLTVSMN]\\s*[0-9]+", "name": "keyword.other.mml.command.fbasic" },
+        { "match": "(?i)[A-GR][#+\\-]?\\.?[0-9]*", "name": "support.constant.mml.note.fbasic" },
+        { "match": "[<>]", "name": "keyword.operator.mml.octave.fbasic" }
+      ]
+    },
+    "string": {
+      "name": "string.quoted.double.fbasic",
+      "begin": "\"",
+      "end": "\"|$"
+    },
+    "jump-statement": {
+      "comment": "行番号を引数に取る命令。後続の数値を行番号参照としてスコープ",
+      "match": "(?i)(?<![A-Za-z0-9_$])(GOTO|GOSUB|THEN|ELSE|RESTORE|RESUME|RUN)\\b(\\s+(\\d+))?",
+      "captures": {
+        "1": { "name": "keyword.control.fbasic" },
+        "3": { "name": "constant.numeric.line-number.reference.fbasic" }
+      }
+    },
+    "number": {
+      "patterns": [
+        { "match": "(?i)&H[0-9A-F]+", "name": "constant.numeric.hex.fbasic" },
+        { "match": "(?i)&O?[0-7]+", "name": "constant.numeric.octal.fbasic" },
+        { "match": "(?i)\\b[0-9]+\\.?[0-9]*(E[-+]?[0-9]+)?[#!%]?", "name": "constant.numeric.fbasic" },
+        { "match": "(?i)\\.[0-9]+(E[-+]?[0-9]+)?[#!%]?", "name": "constant.numeric.fbasic" }
+      ]
+    },
+    "statement-keyword": {
+      "comment": "命令・コマンド（対象外: プリンタ HARDCOPY/LPRINT/LLIST/LPOS）",
+      "match": "(?i)(?<![A-Za-z0-9_$])(AUTO|BEEP|BUBINI|BUBR|BUBW|CHAIN|CIRCLE|CLEAR|CLOADM|CLOAD|CLOSE|CLS|COLOR|COMMON|COM|CONNECT|CONSOLE|CONT|COPY|CSAVE|DATA|DEFDBL|DEFINT|DEFSNG|DEFSTR|DEF|DELETE|DIM|DSKINI|EDIT|ELSE|END|ERROR|EXEC|FIELD|FILES|FN|FOR|GCURSOR|GET|GOSUB|GOTO|GO|IF|INPUT|INTERVAL|KEY|KILL|LET|LINE|LIST|LOADM|LOAD|LOCATE|LSET|MCOPY|MERGE|MON|MOTOR|NAME|NEW|NEXT|ON|OPEN|PAINT|PLAY|POKE|PRESET|PRINT|PSET|PUT|RANDOMIZE|READ|RENUM|REM|RESTORE|RESUME|RETURN|RSET|RUN|SAVEM|SAVE|SCREEN|SET|SKIPF|SOUND|STEP|STOP|SUB|SWAP|SYMBOL|TERM|THEN|TO|TROFF|TRON|UNLIST|USING|VERIFY|VOLCOPY|WEND|WHILE|WIDTH|WRITE)(?![A-Za-z0-9_$])",
+      "name": "keyword.control.fbasic"
+    },
+    "clause-keyword": {
+      "comment": "命令の補助語（ファイルモード等）",
+      "match": "(?i)(?<![A-Za-z0-9_$])(APPEND|OUTPUT|RANDOM|ALL|OFF|AS)(?![A-Za-z0-9_$])",
+      "name": "storage.modifier.fbasic"
+    },
+    "function": {
+      "comment": "組み込み関数（対象外: プリンタ LPOS。STICK/STRIG/PAD/INP/OUT は V3.0 に非搭載のため含めない）",
+      "match": "(?i)(?<![A-Za-z0-9_$])(STRING\\$|SPACE\\$|INKEY\\$|INPUT\\$|DSKI\\$|DSKO\\$|HEX\\$|OCT\\$|LEFT\\$|RIGHT\\$|MID\\$|MKD\\$|MKI\\$|MKS\\$|DATE\\$|TIME\\$|STR\\$|CHR\\$|ABS|ANPORT|ASC|ATN|CDBL|CINT|COS|CSNG|CSRLIN|CVD|CVI|CVS|DSKF|EOF|ERL|ERR|EXP|FIX|FRE|INSTR|INT|LEN|LOC|LOF|LOG|PEEK|PEN|POINT|POS|RND|SGN|SIN|SPC|SQR|TAB|TAN|USR|VAL|VARPTR)(?![A-Za-z0-9_])",
+      "name": "support.function.fbasic"
+    },
+    "operator-keyword": {
+      "match": "(?i)(?<![A-Za-z0-9_$])(AND|OR|NOT|XOR|EQV|IMP|MOD)(?![A-Za-z0-9_$])",
+      "name": "keyword.operator.word.fbasic"
+    },
+    "operator-symbol": {
+      "match": "(<=|>=|<>|[-+*/^\\\\=<>])",
+      "name": "keyword.operator.fbasic"
+    }
+  }
+}

@@ -1,0 +1,136 @@
+{
+  "name": "fb3m7",
+  "displayName": "FB3M7",
+  "description": "FB3M7 — language support for Fujitsu FM-7 F-BASIC V3.0: syntax highlighting, auto line numbering, renumber, GOTO/GOSUB jump, diagnostics, outline, completion and hover.",
+  "version": "0.0.1",
+  "publisher": "7032",
+  "license": "MIT",
+  "icon": "assets/icon.png",
+  "galleryBanner": {
+    "color": "#161a3a",
+    "theme": "dark"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/7032/FB3M7.git"
+  },
+  "bugs": {
+    "url": "https://github.com/7032/FB3M7/issues"
+  },
+  "homepage": "https://github.com/7032/FB3M7#readme",
+  "qna": "marketplace",
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Linters"
+  ],
+  "keywords": [
+    "FB3M7",
+    "F-BASIC",
+    "FM-7",
+    "FM-77",
+    "BASIC",
+    "retro",
+    "line number",
+    "renumber",
+    "8bit",
+    "富士通"
+  ],
+  "main": "./out/extension.js",
+  "activationEvents": [
+    "onLanguage:fbasic"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "fbasic",
+        "aliases": [
+          "F-BASIC 3.0",
+          "fbasic"
+        ],
+        "extensions": [
+          ".bas",
+          ".BAS"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "fbasic",
+        "scopeName": "source.fbasic",
+        "path": "./syntaxes/fbasic.tmLanguage.json"
+      }
+    ],
+    "commands": [
+      {
+        "command": "fbasic.renumber",
+        "title": "FB3M7: Auto Renumber (行番号を振り直す)"
+      },
+      {
+        "command": "fbasic.addLineNumbers",
+        "title": "FB3M7: 番号なし行に行番号を一括付与"
+      },
+      {
+        "command": "fbasic.uppercase",
+        "title": "FB3M7: コードを大文字に変換（予約語・変数名）"
+      },
+      {
+        "command": "fbasic.onEnter",
+        "title": "FB3M7: Enter (次の行番号を自動挿入)"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "fbasic.onEnter",
+        "key": "enter",
+        "when": "editorTextFocus && !editorReadonly && editorLangId == fbasic && !suggestWidgetVisible && !renameInputVisible && !inSnippetMode"
+      },
+      {
+        "command": "fbasic.uppercase",
+        "key": "ctrl+shift+u",
+        "mac": "cmd+shift+u",
+        "when": "editorTextFocus && !editorReadonly && editorLangId == fbasic"
+      }
+    ],
+    "configuration": {
+      "title": "FB3M7",
+      "properties": {
+        "fbasic.lineNumber.increment": {
+          "type": "integer",
+          "default": 10,
+          "minimum": 1,
+          "description": "自動採番および Renumber 時の行番号の増分。"
+        },
+        "fbasic.lineNumber.start": {
+          "type": "integer",
+          "default": 10,
+          "minimum": 0,
+          "description": "Renumber 時の開始行番号。"
+        },
+        "fbasic.autoLineNumber.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "行末で Enter したときに次の行番号を自動挿入する。"
+        },
+        "fbasic.autoUppercase": {
+          "type": "boolean",
+          "default": true,
+          "description": "入力時にコード（予約語・変数名・関数名など）を自動で大文字に変換する。文字列リテラルとコメント本文は原文のまま保持する。"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.75.0",
+    "typescript": "^5.4.0"
+  }
+}

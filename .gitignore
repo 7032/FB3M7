@@ -1,0 +1,9 @@
+node_modules/
+out/
+*.vsix
+.vscode-test/
+
+# ローカル専用（公開リポジトリに含めない）
+CLAUDE.local.md
+*.local.md
+.claude/
